@@ -17,12 +17,20 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    //    float verticalInput = Input.GetAxis("Vertical");
+   //     float horizontalInput = Input.GetAxis("Horizontal");
+
         float verticalInput = Input.GetAxis("Vertical");
         float horizontalInput = Input.GetAxis("Horizontal");
 
-        //movement forward
-        transform.Translate(Vector3.forward * Time.deltaTime * VertSpeed * verticalInput);
-        transform.Translate(Vector3.right * Time.deltaTime * HorizSpeed * horizontalInput);
+        var velocity = new Vector3(horizontalInput * HorizSpeed, 0f, verticalInput * VertSpeed) * Time.deltaTime;
+        GetComponent<Rigidbody>().velocity = velocity;
+
         transform.Rotate(Vector3.up, Time.deltaTime * RotationSpeed * horizontalInput);
+
+        //movement forward
+     //   transform.Translate(Vector3.forward * Time.deltaTime * VertSpeed * verticalInput);
+     //   transform.Translate(Vector3.right * Time.deltaTime * HorizSpeed * horizontalInput);
+     //   transform.Rotate(Vector3.up, Time.deltaTime * RotationSpeed * horizontalInput);
     }
 }

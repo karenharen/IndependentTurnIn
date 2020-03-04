@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
             timerValueText.text = timerValue.ToString();
         }
 
-        if (SpookyValue > 2)
+        if (SpookyValue >= 2)
         {
             Debug.Log("spooky");
             playerSpookyParticles.Play();
