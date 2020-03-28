@@ -6,20 +6,24 @@ public class CrossFinishLine : MonoBehaviour
 {
 
     public GameManager gm;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
-        gm.PlayerCrossedFinishLine();
+        if(other.tag == "Player")
+        {
+            gm.PlayerCrossedFinishLine();
+        }
+        if (other.tag == "enemy")
+        {
+            Debug.Log(other + "crossed the finish line");
+
+            if(gm.isGameRunning==true)
+            {
+                gm.EnemyWonTheRace();
+            }
+            
+        } 
+        
     }
 }

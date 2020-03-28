@@ -4,27 +4,25 @@ using UnityEngine;
 
 public class SpookyCarotAddValue : MonoBehaviour
 {
-    public GameManager gm;
+    public playerMovement playerScript;
     public GameObject carrot;
 
-    // Start is called before the first frame update
-    void Start()
+    //sorry about the bad naming of this it origonally added to a spooky meter but it made more sense for it to trigger the effects instead
+
+
+    private void Start()
     {
-        
+        GameObject player = GameObject.Find("Player");
+        playerScript = player.GetComponent<playerMovement>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            gm.AddToSpookyValue();
-            Destroy(carrot);
+            playerScript.startSpookyBoost();
+            Destroy(gameObject);
         }
     }
 }

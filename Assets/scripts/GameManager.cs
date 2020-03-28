@@ -5,21 +5,23 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Text spookyValueText;
-    public int SpookyValue = 0;
+
     public Text timerValueText;
     public float timerValue;
     public Text bestTimeTextValue;
     public float bestTimeValue;
     public Button restartButton;
+    public Text lossText;
 
-    public Transform player;
+    public GameObject player;
     public Transform resetPlayerPosition;
+    public GameObject enemy;
+    public GameObject carrot;
 
     public ParticleSystem winParicles;
     public ParticleSystem playerSpookyParticles;
 
-    private bool isGameRunning = false;
+    public bool isGameRunning = false;
     private bool firsTimePlaying = false;
 
 
@@ -29,6 +31,9 @@ public class GameManager : MonoBehaviour
         isGameRunning = true;
         firsTimePlaying = true;
         restartButton.gameObject.SetActive(false);
+        Instantiate(enemy);
+        Instantiate(carrot);
+
     }
 
     // Update is called once per frame
@@ -40,18 +45,9 @@ public class GameManager : MonoBehaviour
             timerValueText.text = timerValue.ToString();
         }
 
-        if (SpookyValue >= 2)
-        {
-            Debug.Log("spooky");
-            playerSpookyParticles.Play();
-        }
     }
 
-    public void AddToSpookyValue()
-    {
-        SpookyValue++;
-        spookyValueText.text = SpookyValue.ToString();
-    }
+
 
     public void PlayerCrossedFinishLine()
     {
@@ -74,15 +70,24 @@ public class GameManager : MonoBehaviour
         restartButton.gameObject.SetActive(true);
     }
 
+    public void EnemyWonTheRace()
+    {
+        lossText.gameObject.SetActive(true);
+    }
+
     public void resetGame()
     {
         winParicles.Stop();
-        playerSpookyParticles.Stop();
         restartButton.gameObject.SetActive(false);
-        player.position = resetPlayerPosition.position;
         timerValue = 0;
-        SpookyValue = 0;
         isGameRunning = true;
-
+        Instantiate(enemy);
+        Instantiate(player);
+        Instantiate(carrot);
+        if (lossText.gameObject.activeSelf)
+        {
+            lossText.gameObject.SetActive(false);
+        }
+        
     }
 }

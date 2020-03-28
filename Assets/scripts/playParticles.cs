@@ -8,6 +8,10 @@ public class playParticles : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        hitCyclist.Play();
+        if (other.CompareTag("Player"))
+        {
+            hitCyclist.Play();
+        }
+        
     }
 }

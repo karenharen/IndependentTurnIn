@@ -8,6 +8,10 @@ public class playerMovement : MonoBehaviour
     public float HorizSpeed =10;
     public float RotationSpeed = 10;
 
+
+    public float boostSpeedAmount = 100.0f;
+    public ParticleSystem boostParticles;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,8 +21,6 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    //    float verticalInput = Input.GetAxis("Vertical");
-   //     float horizontalInput = Input.GetAxis("Horizontal");
 
         float verticalInput = Input.GetAxis("Vertical");
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -28,9 +30,22 @@ public class playerMovement : MonoBehaviour
 
         transform.Rotate(Vector3.up, Time.deltaTime * RotationSpeed * horizontalInput);
 
-        //movement forward
-     //   transform.Translate(Vector3.forward * Time.deltaTime * VertSpeed * verticalInput);
-     //   transform.Translate(Vector3.right * Time.deltaTime * HorizSpeed * horizontalInput);
-     //   transform.Rotate(Vector3.up, Time.deltaTime * RotationSpeed * horizontalInput);
+
+    }
+
+    public void startSpookyBoost()
+    {
+        StartCoroutine(SpookyBoost());
+    }
+
+    IEnumerator SpookyBoost()
+    {
+        Debug.Log("coroutine is started");
+        boostParticles.Play();
+        float oldVertSpeed = VertSpeed;
+        VertSpeed = VertSpeed += boostSpeedAmount;
+        yield return new WaitForSeconds(5.0f);
+        VertSpeed = oldVertSpeed;
+        boostParticles.Stop();
     }
 }

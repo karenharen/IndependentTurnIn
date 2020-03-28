@@ -39,8 +39,8 @@ public class followPlayer : MonoBehaviour
               Debug.Log("player current rotation " + currentPlayerRotation); 
    */
 
-        offset = Quaternion.AngleAxis(horizontalInput, Vector3.up) * offset;
-        transform.position = player.transform.position + offset;
+   //     offset = Quaternion.AngleAxis(horizontalInput, Vector3.up) * offset;
+   //     transform.position = player.transform.position + offset;
 
        transform.LookAt(currentPlayerLocation);
     }
