@@ -10886,7 +10886,9 @@ MonoBehaviour:
   player: {fileID: 9106248909941210182, guid: a162fa4075944c8479801312d8a30b23, type: 3}
   resetPlayerPosition: {fileID: 566387411}
   enemy: {fileID: 2134741049582851979, guid: 6f2f3203fa35fef4992c581339318d7b, type: 3}
-  carrot: {fileID: 646324761293454414, guid: 4cc1bf553b4603545a7f3edf358559b6, type: 3}
+  carrots:
+  - {fileID: 646324761293454414, guid: b6c13605119cc0141a9e221922775278, type: 3}
+  - {fileID: 646324761293454414, guid: 4cc1bf553b4603545a7f3edf358559b6, type: 3}
   winParicles: {fileID: 909875357}
   playerSpookyParticles: {fileID: 1867141783}
   isGameRunning: 0

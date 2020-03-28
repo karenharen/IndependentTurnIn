@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public Transform resetPlayerPosition;
     public GameObject enemy;
-    public GameObject carrot;
+    public GameObject[] carrots;
 
     public ParticleSystem winParicles;
     public ParticleSystem playerSpookyParticles;
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
         firsTimePlaying = true;
         restartButton.gameObject.SetActive(false);
         Instantiate(enemy);
-        Instantiate(carrot);
+        placeCarrots();
 
     }
 
@@ -45,6 +45,16 @@ public class GameManager : MonoBehaviour
             timerValueText.text = timerValue.ToString();
         }
 
+    }
+
+    void placeCarrots()
+    {
+        foreach (GameObject carrot in carrots)
+        {
+            float randomZ = Random.Range(0f, 50f);
+            float randomX = Random.Range(-11f, 1.5f);
+            Instantiate(carrot, new Vector3(randomX, carrot.transform.position.y, randomZ), Quaternion.identity);
+        }
     }
 
 
@@ -83,7 +93,7 @@ public class GameManager : MonoBehaviour
         isGameRunning = true;
         Instantiate(enemy);
         Instantiate(player);
-        Instantiate(carrot);
+ 
         if (lossText.gameObject.activeSelf)
         {
             lossText.gameObject.SetActive(false);
