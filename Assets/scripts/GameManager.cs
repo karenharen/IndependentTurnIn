@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
         Instantiate(enemy);
         placeCarrots();
 
+        bestTimeTextValue.text = PlayerPrefs.GetFloat("BestTime", 0).ToString();
+
     }
 
     // Update is called once per frame
@@ -49,12 +51,16 @@ public class GameManager : MonoBehaviour
 
     void placeCarrots()
     {
+        Random.InitState(System.DateTime.Now.Millisecond);
         foreach (GameObject carrot in carrots)
         {
             float randomZ = Random.Range(0f, 50f);
             float randomX = Random.Range(-11f, 1.5f);
+
             Instantiate(carrot, new Vector3(randomX, carrot.transform.position.y, randomZ), Quaternion.identity);
+
         }
+
     }
 
 
@@ -69,6 +75,7 @@ public class GameManager : MonoBehaviour
             {
                 bestTimeValue = timerValue;
                 bestTimeTextValue.text = bestTimeValue.ToString();
+                PlayerPrefs.SetFloat("BestTime",bestTimeValue);
             }
         } else
         {

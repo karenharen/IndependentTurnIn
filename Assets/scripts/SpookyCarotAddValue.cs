@@ -12,7 +12,7 @@ public class SpookyCarotAddValue : MonoBehaviour
 
     private void Start()
     {
-        GameObject player = GameObject.Find("Player");
+        GameObject player = GameObject.Find("Horse");
         playerScript = player.GetComponent<playerMovement>();
     }
 
