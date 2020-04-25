@@ -10,6 +10,15 @@ public class moveForward : MonoBehaviour
 
     private float endOfTheRoadZ = 135.0f;
 
+    public AudioClip eakClip;
+     AudioSource eak;
+
+    private void Start()
+    {
+        eak = GetComponent<AudioSource>();
+        
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -32,6 +41,7 @@ public class moveForward : MonoBehaviour
 
     IEnumerator slowDownEnemy()
     {
+        eak.PlayOneShot(eakClip);
         float oldSpeed = speed;
         speed = slowedSpeed; 
         hitCyclist.Play();

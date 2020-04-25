@@ -7,6 +7,8 @@ public class SpookyCarotAddValue : MonoBehaviour
     public playerMovement playerScript;
     public GameObject carrot;
 
+
+
     //sorry about the bad naming of this it origonally added to a spooky meter but it made more sense for it to trigger the effects instead
 
 
@@ -14,6 +16,7 @@ public class SpookyCarotAddValue : MonoBehaviour
     {
         GameObject player = GameObject.Find("Horse");
         playerScript = player.GetComponent<playerMovement>();
+
     }
 
 
@@ -21,6 +24,7 @@ public class SpookyCarotAddValue : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+
             playerScript.startSpookyBoost();
             Destroy(gameObject);
         }

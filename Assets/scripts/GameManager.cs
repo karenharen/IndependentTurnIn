@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
     public float bestTimeValue;
     public Button restartButton;
     public Text lossText;
+    public pumpkinSpawner pumpkinSpawnScript;
 
     public GameObject player;
     public Transform resetPlayerPosition;
@@ -24,6 +26,9 @@ public class GameManager : MonoBehaviour
     public bool isGameRunning = false;
     private bool firsTimePlaying = false;
 
+    private playerMovement playerMovementScript;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -33,8 +38,9 @@ public class GameManager : MonoBehaviour
         restartButton.gameObject.SetActive(false);
         Instantiate(enemy);
         placeCarrots();
+        playerMovementScript = player.GetComponent<playerMovement>();
 
-        bestTimeTextValue.text = PlayerPrefs.GetFloat("BestTime", 0).ToString();
+        bestTimeTextValue.text = PlayerPrefs.GetFloat("bestTimeValue").ToString();
 
     }
 
@@ -54,10 +60,12 @@ public class GameManager : MonoBehaviour
         Random.InitState(System.DateTime.Now.Millisecond);
         foreach (GameObject carrot in carrots)
         {
-            float randomZ = Random.Range(0f, 50f);
+            float randomZ = Random.Range(0f, 120f);
             float randomX = Random.Range(-11f, 1.5f);
 
             Instantiate(carrot, new Vector3(randomX, carrot.transform.position.y, randomZ), Quaternion.identity);
+
+            Debug.Log(carrot +" is at x " + randomX +" and z is "+ randomZ);
 
         }
 
@@ -69,6 +77,9 @@ public class GameManager : MonoBehaviour
     {
         isGameRunning = false;
         winParicles.Play();
+        playerMovementScript.setGameOverTrue();
+        pumpkinSpawnScript.setGameToOver();
+
         if (firsTimePlaying == false)
         {
             if (timerValue < bestTimeValue)
@@ -94,6 +105,10 @@ public class GameManager : MonoBehaviour
 
     public void resetGame()
     {
+        PlayerPrefs.SetFloat("bestTimeValue", bestTimeValue);
+        SceneManager.LoadScene(0);
+
+        /*
         winParicles.Stop();
         restartButton.gameObject.SetActive(false);
         timerValue = 0;
@@ -104,7 +119,7 @@ public class GameManager : MonoBehaviour
         if (lossText.gameObject.activeSelf)
         {
             lossText.gameObject.SetActive(false);
-        }
+        } */
         
     }
 }
