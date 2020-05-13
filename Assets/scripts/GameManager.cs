@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public float bestTimeValue;
     public Button restartButton;
     public Text lossText;
+    public Text winText;
     public pumpkinSpawner pumpkinSpawnScript;
 
     public GameObject player;
@@ -53,6 +54,11 @@ public class GameManager : MonoBehaviour
             timerValueText.text = timerValue.ToString();
         }
 
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            resetGame();
+        }
+
     }
 
     void placeCarrots()
@@ -79,6 +85,7 @@ public class GameManager : MonoBehaviour
         winParicles.Play();
         playerMovementScript.setGameOverTrue();
         pumpkinSpawnScript.setGameToOver();
+        winText.enabled = true;
 
         if (firsTimePlaying == false)
         {

@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class playerMovement : MonoBehaviour
 {
-    public float VertSpeed =20;
-    public float HorizSpeed =10;
-    public float RotationSpeed = 10;
+    public float VertSpeed =20f;
+    public float HorizSpeed =10f;
+    public float RotationSpeed = 10f;
+    public float JumpUp;
+    public float gravityMultiplier;
+
     public Animator anim;
     bool isRunning = false;
-
+    Rigidbody playerRB;
 
     public float boostSpeedAmount = 100.0f;
     public ParticleSystem boostParticles;
 
     public bool gameOver = false;
+   public bool onGround = true;
 
     AudioSource audioSource;
     public AudioClip horseSound;
@@ -23,6 +27,18 @@ public class playerMovement : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        playerRB = GetComponent<Rigidbody>();
+
+  //     Physics.gravity *= gravityMultiplier;
+        Debug.Log("This is start, Horse is " + transform.position);
+    }
+
+    private void Awake()
+    {
+        gameOver = false;
+        onGround = true;
+        isRunning = false;
+        Debug.Log("This is awake, Horse is " + transform.position + " and gravity " + Physics.gravity);
     }
 
     // Update is called once per frame
@@ -37,12 +53,16 @@ public class playerMovement : MonoBehaviour
         GetComponent<Rigidbody>().velocity = velocity;
 
         transform.Rotate(Vector3.up, Time.deltaTime * RotationSpeed * horizontalInput);
-            Debug.Log(verticalInput);
             anim.SetFloat("speed", verticalInput);
             
-
-
         }
+
+       if (Input.GetKeyDown(KeyCode.Space) && !gameOver && onGround)
+        {
+            playerRB.AddForce(Vector3.up *JumpUp, ForceMode.Impulse);
+            onGround = false;
+        }
+        
 
 
     }
@@ -67,5 +87,13 @@ public class playerMovement : MonoBehaviour
     public void setGameOverTrue()
     {
         gameOver = true;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("ground"))
+        {
+            onGround = true;
+        }
     }
 }
