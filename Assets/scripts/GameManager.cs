@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-
-    public Text timerValueText;
+    [Header("GUI")]
+    public TextMeshProUGUI timerValueText;
     public float timerValue;
-    public Text bestTimeTextValue;
+    public TextMeshProUGUI bestTimeTextValue;
     public float bestTimeValue;
     public Button restartButton;
-    public Text lossText;
-    public Text winText;
+    public TextMeshProUGUI lossText;
+    public TextMeshProUGUI winText;
+
+    
+    [Header("Game Stuff")]
     public pumpkinSpawner pumpkinSpawnScript;
 
     public GameObject player;
