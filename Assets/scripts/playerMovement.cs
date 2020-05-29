@@ -11,7 +11,6 @@ public class playerMovement : MonoBehaviour
     public float gravityMultiplier;
 
     public Animator anim;
-    bool isRunning = false;
     Rigidbody playerRB;
 
     public float boostSpeedAmount = 100.0f;
@@ -37,8 +36,7 @@ public class playerMovement : MonoBehaviour
     {
         gameOver = false;
         onGround = true;
-        isRunning = false;
-        Debug.Log("This is awake, Horse is " + transform.position + " and gravity " + Physics.gravity);
+
     }
 
     // Update is called once per frame
@@ -87,6 +85,7 @@ public class playerMovement : MonoBehaviour
     public void setGameOverTrue()
     {
         gameOver = true;
+        Debug.Log("Game Over is now True");
     }
 
     private void OnCollisionEnter(Collision collision)

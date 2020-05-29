@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
 
             Instantiate(carrot, new Vector3(randomX, carrot.transform.position.y, randomZ), Quaternion.identity);
 
-            Debug.Log(carrot +" is at x " + randomX +" and z is "+ randomZ);
+
 
         }
 
@@ -106,18 +106,23 @@ public class GameManager : MonoBehaviour
             
         }
         firsTimePlaying = false;
+        PlayerPrefs.SetFloat("bestTimeValue", bestTimeValue);
         restartButton.gameObject.SetActive(true);
     }
 
     public void EnemyWonTheRace()
     {
         lossText.gameObject.SetActive(true);
+        isGameRunning = false;
+        playerMovementScript.setGameOverTrue();
+        pumpkinSpawnScript.setGameToOver();
+        restartButton.gameObject.SetActive(true);
     }
 
     public void resetGame()
     {
-        PlayerPrefs.SetFloat("bestTimeValue", bestTimeValue);
-        SceneManager.LoadScene(0);
+        
+        SceneManager.LoadScene("level1");
 
         /*
         winParicles.Stop();
